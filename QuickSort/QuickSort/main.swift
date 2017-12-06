@@ -17,6 +17,20 @@ func quicksort<T: Comparable>(_ a: [T]) -> [T] {
     return quicksort(less) + equal + quicksort(greater)
 }
 
+func partitionLomuto<T: Comparable>(_ a: inout[T], low: Int, high: Int) -> Int {
+    let pivot = a[high]
+    
+    var i = low
+    for j in low..<high {
+        if a[j] <= pivot {
+            (a[i], a[j]) = (a[j], a[i])
+            i += 1
+        }
+    }
+    (a[i], a[high]) = (a[high], a[i])
+    return i
+}
+
 let testArr = [ 10, 0, 3, 9, 2, 14, 8, 27, 1, 5, 8, -1, 26 ]
 let sortArr = quicksort(testArr)
 print(sortArr)
